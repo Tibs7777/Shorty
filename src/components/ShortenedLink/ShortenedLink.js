@@ -9,21 +9,22 @@ const ShortenedLink = props => {
     const copyHandler = () => {
         copy.current.select()
         document.execCommand('copy')
-        let newLinks = [...props.links]
-        newLinks = newLinks.map(link => {
-            if(link.hashid === props.id) {
-                return {
-                    ...link,
-                    copied: true
-                }
-            } else {
-                return {
-                    ...link,
-                    copied: false
-                }
-            }
-        })
-        props.setLinks(newLinks)
+        // let newLinks = [...props.links]
+        // newLinks = newLinks.map(link => {
+        //     if(link.hashid === props.id) {
+        //         return {
+        //             ...link,
+        //             copied: true
+        //         }
+        //     } else {
+        //         return {
+        //             ...link,
+        //             copied: false
+        //         }
+        //     }
+        // })
+        // props.setLinks(newLinks)
+        props.dispatch({type: 'UPDATE_COPIED_LINKS', id: props.id})
     }
 
 

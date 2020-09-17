@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useReducer } from 'react'
 import Hero from '../../components/Hero/Hero'
 import LinkShortener from '../../components/LinkShortener/LinkShortener'
 import ShortenedLinksList from '../../components/ShortenedLinksList/ShortenedLinksList'
@@ -6,28 +6,81 @@ import Statistics from '../../components/Statistics/Statistics'
 import BoostBanner from '../../components/BoostBanner/BoostBanner'
 
 
+const initialState = []
+
+const linkReducer = (state, action) => {
+    switch(action.type) {
+        case 'ADD_LINK':
+            let addedLinks = [...state]
+            if(addedLinks.length > 5) {
+                addedLinks.pop()
+            }
+            return [{original: action.original, shortened: action.shortened, hashid: action.hashid, copied: action.copied}, ...addedLinks]
+        case 'REMOVE_LINK':
+            let removedLinks = [...state]
+            return removedLinks.filter(link => link.hashid !== action.id)
+        case 'UPDATE_COPIED_LINKS':
+            let updatedLinks = [...state]
+            return updatedLinks.map(link => {
+                if(link.hashid === action.id) {
+                    return {
+                        ...link,
+                        copied: true
+                    }
+                } else {
+                    return {
+                        ...link,
+                        copied: false
+                    }
+                }
+            })
+        case 'INIT_LINKS':
+            return action.links
+        default:
+            throw new Error('shouldnt get here')
+    }
+}
+
+
 const Shortener = (props) => {
 
-    const [links, setLinks] = useState([])
+
+    const [links, dispatch] = useReducer(linkReducer, initialState)
+
+
+    // const [links, setLinks] = useState([])
     const [error, setError] = useState(null)
     const [link, setLink] = useState('')
     const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
-        const getLinks = JSON.parse(localStorage.getItem("Links")) || []
-        setLinks(getLinks)
+        let getLinks;
+        if (!localStorage.getItem("Links") || localStorage.getItem("Links") === "undefined"){
+            const getLinks = []
+            dispatch({type: 'INIT_LINKS', links: getLinks})
+            return
+        } else {
+            const getLinks = JSON.parse(localStorage.getItem("Links"))
+            // setLinks(getLinks)
+            dispatch({type: 'INIT_LINKS', links: getLinks})
+        }
+
     }, [])
 
-   const setLinksLength = (arr) => {
-        let newLinks = [...arr]
-        if(arr.length > 5) {
-            newLinks.pop()
-        }
-        setLinks(newLinks)
-    }
+//    const setLinksLength = (arr) => {
+//         let newLinks = [...arr]
+//         if(arr.length > 5) {
+//             newLinks.pop()
+//         }
+//         setLinks(newLinks)
+//     }
 
+
+
+    //Don't like this solution. Updates localstorage more often than below it but also fires on every copy
     useEffect(() => {
+        console.log('firing')
         const uncopiedLinks = links.map(link => {
             return {
                 ...link,
@@ -78,7 +131,8 @@ const Shortener = (props) => {
         .then(res => res.json())
         .then(res => {
             if (res.hashid) {
-                setLinksLength([{original: res.url, shortened: `https://rel.ink/${res.hashid}`, hashid: res.hashid, copied: false}, ...links])
+                // setLinksLength([{original: res.url, shortened: `https://rel.ink/${res.hashid}`, hashid: res.hashid, copied: false}, ...links])
+                dispatch({type: 'ADD_LINK', original: res.url, shortened: `https://rel.ink/${res.hashid}`, hashid: res.hashid, copied: false})
                 setLink('')
                 setLoading(false)
             } else {
@@ -94,9 +148,10 @@ const Shortener = (props) => {
     }
 
     const deleteLink = useCallback((id) => {
-        const newLinks = links.filter(link => link.hashid !== id)
-        setLinks(newLinks)
-    }, [links, setLinks])
+        // const newLinks = links.filter(link => link.hashid !== id)
+        // setLinks(newLinks)
+        dispatch({type: 'REMOVE_LINK', id: id})
+    }, [dispatch])
 
 
 
@@ -107,7 +162,7 @@ const Shortener = (props) => {
         <div>
             <Hero />
             <LinkShortener shortenLink={shortenLink} error={error} setError={setError} link={link.toLowerCase()} setLink={setLink} loading={loading}/>
-            <ShortenedLinksList links={links} setLinks={setLinks} deleteLink={deleteLink}/>
+            <ShortenedLinksList links={links} dispatch={dispatch} deleteLink={deleteLink}/>
             <Statistics />
             <BoostBanner />
         </div>

@@ -15,7 +15,7 @@ const ShortenedLinksList = props => {
                             original={link.original}
                             shortened={link.shortened}
                             links={props.links}
-                            setLinks={props.setLinks}
+                            dispatch={props.dispatch}
                             id={link.hashid}
                             copied={link.copied}
                             deleteLink={() => props.deleteLink(link.hashid)}
