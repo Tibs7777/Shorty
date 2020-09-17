@@ -92,7 +92,7 @@ const Shortener = (props) => {
     return(
         <div>
             <Hero />
-            <LinkShortener shortenLink={shortenLink} error={error} setError={setError} link={link} setLink={setLink} loading={loading}/>
+            <LinkShortener shortenLink={shortenLink} error={error} setError={setError} link={link.toLowerCase()} setLink={setLink} loading={loading}/>
             <ShortenedLinksList links={links} setLinks={setLinks} deleteLink={deleteLink}/>
             <Statistics />
             <BoostBanner />

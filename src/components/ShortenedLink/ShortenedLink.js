@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import './ShortenedLink.scss'
 import Button from '../UI/Button/Button'
 const ShortenedLink = props => {
