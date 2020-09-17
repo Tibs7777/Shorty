@@ -44,6 +44,7 @@
         @include breakpoint($medium){
             padding: 0 0 0 2.4rem;
             margin-right: 5rem;
+            margin-left: 0;
         }
 
         @include breakpoint($largest){
