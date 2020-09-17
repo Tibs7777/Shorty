@@ -8,6 +8,7 @@ import BoostBanner from '../../components/BoostBanner/BoostBanner'
 
 const initialState = []
 
+
 const linkReducer = (state, action) => {
     switch(action.type) {
         case 'ADD_LINK':
@@ -15,10 +16,26 @@ const linkReducer = (state, action) => {
             if(addedLinks.length > 5) {
                 addedLinks.pop()
             }
-            return [{original: action.original, shortened: action.shortened, hashid: action.hashid, copied: action.copied}, ...addedLinks]
+            addedLinks = [{original: action.original, shortened: action.shortened, hashid: action.hashid, copied: action.copied}, ...addedLinks]
+            const uncopiedLinks = addedLinks.map(link => {
+                return {
+                    ...link,
+                    copied: false
+                }
+            })
+            window.localStorage.setItem("Links", JSON.stringify(uncopiedLinks))
+            return addedLinks
         case 'REMOVE_LINK':
             let removedLinks = [...state]
-            return removedLinks.filter(link => link.hashid !== action.id)
+            removedLinks = removedLinks.filter(link => link.hashid !== action.id)
+            const uncopyLinks = removedLinks.map(link => {
+                return {
+                    ...link,
+                    copied: false
+                }
+            })
+            window.localStorage.setItem("Links", JSON.stringify(uncopyLinks))
+            return removedLinks
         case 'UPDATE_COPIED_LINKS':
             let updatedLinks = [...state]
             return updatedLinks.map(link => {
@@ -57,11 +74,11 @@ const Shortener = (props) => {
     useEffect(() => {
         let getLinks;
         if (!localStorage.getItem("Links") || localStorage.getItem("Links") === "undefined"){
-            const getLinks = []
+            getLinks = []
             dispatch({type: 'INIT_LINKS', links: getLinks})
             return
         } else {
-            const getLinks = JSON.parse(localStorage.getItem("Links"))
+            getLinks = JSON.parse(localStorage.getItem("Links"))
             // setLinks(getLinks)
             dispatch({type: 'INIT_LINKS', links: getLinks})
         }
@@ -78,17 +95,18 @@ const Shortener = (props) => {
 
 
 
+
     //Don't like this solution. Updates localstorage more often than below it but also fires on every copy
-    useEffect(() => {
-        console.log('firing')
-        const uncopiedLinks = links.map(link => {
-            return {
-                ...link,
-                copied: false
-            }
-        })
-        window.localStorage.setItem("Links", JSON.stringify(uncopiedLinks))
-    }, [links])
+    // useEffect(() => {
+    //     console.log('firing')
+    //     const uncopiedLinks = links.map(link => {
+    //         return {
+    //             ...link,
+    //             copied: false
+    //         }
+    //     })
+    //     window.localStorage.setItem("Links", JSON.stringify(uncopiedLinks))
+    // }, [links])
 
 
     // useEffect(() => {
