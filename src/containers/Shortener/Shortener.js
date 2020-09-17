@@ -8,8 +8,19 @@ import BoostBanner from '../../components/BoostBanner/BoostBanner'
 
 const initialState = []
 
+const updateLocalStorage = (arr) => {
+    const uncopiedLinks = arr.map(link => {
+        return {
+            ...link,
+            copied: false
+        }
+    })
+    window.localStorage.setItem("Links", JSON.stringify(uncopiedLinks))
+}
+
 
 const linkReducer = (state, action) => {
+
     switch(action.type) {
         case 'ADD_LINK':
             let addedLinks = [...state]
@@ -17,24 +28,12 @@ const linkReducer = (state, action) => {
                 addedLinks.pop()
             }
             addedLinks = [{original: action.original, shortened: action.shortened, hashid: action.hashid, copied: action.copied}, ...addedLinks]
-            const uncopiedLinks = addedLinks.map(link => {
-                return {
-                    ...link,
-                    copied: false
-                }
-            })
-            window.localStorage.setItem("Links", JSON.stringify(uncopiedLinks))
+            updateLocalStorage(addedLinks)
             return addedLinks
         case 'REMOVE_LINK':
             let removedLinks = [...state]
             removedLinks = removedLinks.filter(link => link.hashid !== action.id)
-            const uncopyLinks = removedLinks.map(link => {
-                return {
-                    ...link,
-                    copied: false
-                }
-            })
-            window.localStorage.setItem("Links", JSON.stringify(uncopyLinks))
+            updateLocalStorage(removedLinks)
             return removedLinks
         case 'UPDATE_COPIED_LINKS':
             let updatedLinks = [...state]
