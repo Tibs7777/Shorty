@@ -1,0 +1,50 @@
+@import '../../../scss/mixins';
+@import '../../../scss/variables';
+
+.StatisticsCard {
+    text-align: center;
+    background: #FFF;
+    border-radius: 1rem;
+    position: relative;
+    padding: 7.7rem 3.2rem 4.1rem 3.2rem;
+    max-width: 1110px;
+    margin: 0 auto;
+
+    @include breakpoint($larger){
+        width: 35rem;
+        margin: 0;
+        text-align: left;
+    }
+
+    &__image-container {
+        display: inline-block;
+        background: #3A3054;
+        border-radius: 50%;
+        width: 8.8rem;
+        height: 8.8rem;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+    }
+
+    &__title {
+        margin-bottom: 1.2rem;
+    }
+
+    &__paragraph {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #9E9AA8;
+        max-width: 70rem;
+        margin: 0 auto;
+    }
+}

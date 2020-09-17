@@ -1,0 +1,85 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
+
+.Button {
+    border: none;
+    background: $color-cyan;
+    color: #FFF;
+    font-family: inherit;
+    font-size: inherit;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .2s;
+
+    &:hover{
+        background: #9AE3E3;
+
+        & > ::after {
+            background: #9AE3E3;
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &--rounded {
+        border-radius: 100px;
+    }
+
+    &--s {
+        font-size: 1.5rem;
+        width: 10.5rem;
+        padding: 0.9rem 0 0.8rem 0;
+    }
+
+    &--m {
+        width: 19.7rem;
+        padding: 1.4rem 0 1.2rem 0;
+    }
+
+    &--l {
+        width: 80%;
+        padding: 1rem 0 1rem 0;
+    }
+
+    &--full{
+        width: 100%;
+        padding: .8rem 0;
+    }
+
+    &--input{
+        width: 100%;
+        padding: .8rem 0;
+
+        @include breakpoint($medium) {
+            width: 18.8rem
+        }
+    }
+
+    &--link {
+        width: 100%;
+        padding: .8rem 0;
+
+        @include breakpoint($large) {
+            width: 10.3rem;
+            display: inline-block;
+            flex: 0 0 auto;
+        }
+    }
+
+    &--copied{
+        background-color: #3A3054;
+
+        &:hover{
+            background-color: #4B3F6B;
+        }
+    }
+
+    &--loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .8rem 2rem;
+    }
+}

@@ -1,0 +1,127 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.NavigationItems{
+    position: fixed;
+    width: 90%;
+    max-width: 32.7rem;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    background-color: $color-dark-violet;
+    color: #FFF;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    text-align: center;
+    padding: 4rem 0;
+    transition: transform .5s ease-out;
+    flex: 1;
+
+    @include breakpoint($medium){
+        position: static;
+        width: initial;
+        border-radius: 0px;
+        flex-direction: row;
+        background-color: transparent;
+        color: #9E9AA8;
+        transform: none;
+        padding: 0;
+        transition: none;
+    }
+
+    &--open{
+        transform: translate(-50%, 9.6rem);
+
+        @include breakpoint($medium){
+            transform: none;
+            transition: none;
+        }
+    }
+
+    &__nav{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include breakpoint($medium){
+            flex-direction: row;
+        }
+
+        
+        &::after{
+            content: "";
+            background-color: #9E9AA8;
+            width: 80%;
+            height: 1px;
+
+            @include breakpoint($medium){
+                display: none;
+            }
+        }
+
+        & > *,
+        &::after {
+            margin-bottom: 3rem; 
+            @include breakpoint($medium){
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__auth{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include breakpoint($medium){
+            flex-direction: row;
+            margin-left: auto;
+        }
+
+        & > * {
+            margin-bottom: 2.4rem;
+            @include breakpoint($medium){
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__item{
+        font-weight: 700;
+        cursor: pointer;
+
+        &:hover{
+            color: #9E9AA8;
+        }
+
+        @include breakpoint($medium){
+            font-size: 1.5rem;
+            margin-right: 3rem;
+
+            &:hover{
+                color: #34313D;
+            }
+        }
+
+    }
+
+    &--desktop {
+        display: none;
+
+        @include breakpoint($medium){
+            display: flex;
+            max-width: none;
+        }
+    }
+
+    &--mobile{
+        
+        @include breakpoint($medium){
+            display: none;
+        }
+    }
+}

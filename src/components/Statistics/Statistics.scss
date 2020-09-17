@@ -1,0 +1,89 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.Statistics {
+    padding: 0 2.4rem;
+    max-width: 1110px;
+    margin: 8rem auto;
+
+
+    @include breakpoint($medium){
+
+    }
+
+
+    @include breakpoint($larger) {
+        margin-top: 12rem;
+        margin-bottom: 21rem;
+        padding: 0;
+    }
+
+    @include breakpoint($largest){
+        max-width: none;
+        padding: 0 16.7rem;
+    }
+
+    &__heading {
+        text-align: center;
+        margin-bottom: 9.2rem;
+    }
+
+    &__paragraph {
+        line-height: 3.2rem;
+        letter-spacing: 0.12px;
+        color: #9E9AA8;
+        max-width: 54rem;
+        margin: 0 auto;
+    }
+
+    &__title {
+        margin-bottom: 1.6rem;
+        color: #34313D;
+    }
+
+    &__cards {
+        position: relative;
+
+        @include breakpoint($larger){
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+
+            & > :nth-child(n+2) {
+               transform: translateY(4.4rem);
+            }
+
+            & > :nth-child(n+3) {
+                transform: translateY(8.8rem);
+             }
+        }
+
+        &::after {
+            content: "";
+            width: 8px;
+            height: 100%;
+            position: absolute;
+            background-color: $color-cyan;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+
+            @include breakpoint($larger){
+                height: 8px;
+                width: 100%;
+                left: 0;
+                top: 50%;
+                transform: translateY(2rem);
+            }
+        }
+
+        & > :not(:last-child) {
+            margin-bottom: 9.2rem;
+
+            @include breakpoint($larger){
+                margin: 0;
+            }
+        }
+    }
+}

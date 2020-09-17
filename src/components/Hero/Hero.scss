@@ -1,0 +1,93 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.Heading{
+    text-align: center;
+    padding-top: 2.3rem;
+    padding-bottom: 16.8rem;
+    background: #FFF;
+    margin: 0 auto;
+    max-width: 1110px;
+
+    &__outer{
+        width: 100%;
+        overflow: hidden;
+        background: #FFF;
+    }
+
+    &__paragraph {
+        line-height: 3rem;
+        letter-spacing: .12px;
+        margin: 1.6rem 0 3.2rem 0;
+
+        @include breakpoint($medium){
+            font-size: 2rem;
+        }
+
+        @include breakpoint($largest){
+            font-size: 2.2rem;
+            line-height: 3.6rem;
+            letter-spacing: 0.15px;
+        }
+    }
+
+    &__title{
+        max-width: 70rem;
+    }
+
+    &__text{
+        padding: 0 2.4rem;
+        color: $color-grayish-violet;
+        max-width: 70rem;
+        margin: 0 auto;
+
+        @include breakpoint($medium){
+            padding: 0 0 0 2.4rem;
+            margin-right: 5rem;
+        }
+
+        @include breakpoint($largest){
+            padding: 0;
+            margin-right: 10rem;
+        }
+    }
+
+
+    @include breakpoint($medium){
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-between;
+        overflow: visible;
+        text-align: left;
+        padding-top: 6rem;
+    }
+
+    @include breakpoint($largest){
+        padding: 8rem 16.7rem 16.7rem 16.7rem;
+        max-width: none;
+    }
+}
+
+.Hero {
+    padding-left: 2.4rem;
+
+    &__image {
+        width: 148%; //55.5rem
+        max-width: 73.3rem;
+
+        @include breakpoint($medium){
+            min-width: 35rem;
+        }
+
+        @include breakpoint($largest){
+           width: 200%;
+        }
+    }
+    margin-bottom: 4rem;
+
+    @include breakpoint($medium){
+        padding: 0;
+    }
+
+}

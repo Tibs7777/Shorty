@@ -1,0 +1,98 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.LinkShortener {
+    margin: 0 auto;
+    background: $color-dark-violet;
+    background-image: url(../../assets/bg-shorten-mobile.svg);
+    background-position: top right;
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    text-align: center;
+    border-radius: 1rem;
+    transform: translateY(-8rem);
+    padding: 2.4rem;
+    margin-bottom: -8rem;
+    max-width: 1110px;
+
+    @include breakpoint($medium) {
+        display: flex;
+        background-image: url(../../assets/bg-shorten-desktop.svg);
+        background-size: cover;
+        padding: 5.2rem 6.4rem;
+    }
+
+
+    @include breakpoint($largest) {
+        max-width: none;
+    }
+
+    &__outer {
+        padding: 0 2.4rem;
+
+        @include breakpoint($largest) {
+            padding: 0 16.7rem;
+        }
+    }
+
+
+    &__input{
+        width: 100%;
+        padding: .3rem 0 .3rem 1.6rem;
+        
+        border-radius: 5px;
+        font-size: 1.6rem;
+        line-height: 3.6rem;
+        color: #34313D;
+        border: 3px solid transparent;
+        position: relative;
+
+        &:focus{
+            outline: none;
+        }
+
+        &--error {
+            border-color: $color-red;
+
+            &::placeholder {
+                color: $color-red;
+            }
+
+        }
+
+        @include breakpoint($medium) {
+            width: initial;
+            flex: 1 1 auto;
+            padding: 1.1rem 0 1.1rem 1.6rem;
+            font-size: 2rem;
+            letter-spacing: 0.15px;
+            margin-right: 2.4rem;
+        }
+    }
+
+    &__error{
+        display: block;
+        text-align: left;
+        color: $color-red;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        letter-spacing: 0.08px;
+
+        
+        @include breakpoint($medium) {
+            position: absolute;
+            top: 12.5rem;
+            left: 6.4rem;
+            font-size: 1.4rem;
+        }
+    }
+
+    & > :last-child {
+        margin-top: 1.6rem;
+
+        @include breakpoint($medium) {
+            margin-top: 0;
+        }
+    }
+
+}

@@ -1,0 +1,39 @@
+@import './mixins';
+@import './variables';
+
+.heading--primary {
+    font-size: 4.2rem;
+    font-weight: 700;
+    line-height: 4.8rem;
+    letter-spacing: -1.05px;
+    color: #34313D;
+
+    @include breakpoint($medium){
+        font-size: 5rem;
+        line-height: 6.5rem;
+        letter-spacing: -1.5px;
+    }
+
+    @include breakpoint($largest){
+        font-size: 8rem;
+        line-height: 9rem;
+        letter-spacing: -2px;
+    }
+}
+
+.heading--secondary {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 4.8rem;
+    letter-spacing: -1px;
+
+
+    @include breakpoint($medium){
+        font-size: 4rem;
+    }
+}
+
+.heading--tertiary {
+    font-size: 2.2rem;
+    font-weight: 700;
+}

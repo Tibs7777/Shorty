@@ -1,0 +1,204 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+
+.Header {
+    display: flex;
+    align-items: center;
+    padding: 4rem 2.4rem 0 2.4rem;
+    background: #FFF;
+    margin: 0 auto;
+    max-width: 1110px;
+
+    @include breakpoint($largest){
+        max-width: none;
+        padding: 4rem 16.7rem 0 16.7rem;
+    }
+
+    &__logo{
+        margin-right: 4.5rem;
+    }
+
+    &__outer{
+        background: #FFF;
+    }
+}
+
+.Burger {
+
+    cursor: pointer;
+    height: 21px;
+    margin-left: auto;
+
+
+
+    .Line {
+        width: 24px;
+        height: 3px;
+        background-color: #9E9AA8;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all .2s;
+
+
+        &::before{
+            content: "";
+            width: 24px;
+            height: 3px;
+            background-color: #9E9AA8;
+            transform: translateY(-9px);
+            position: absolute;
+            transition: all .2s;
+        }
+
+        &::after{
+            content: "";
+            width: 24px;
+            height: 3px;
+            background-color: #9E9AA8;
+            transform: translateY(9px);
+            position: absolute;
+            transition: all .2s;
+        }
+    }
+
+    &:hover > *,
+    &:hover > *::after,
+    &:hover > *::before{
+        background-color: black;
+    }
+
+    &--open {
+        
+        .Line {
+            background-color: transparent;
+
+            &::before{
+                transform: rotatez(45deg);
+            }
+    
+            &::after{
+                transform: rotatez(-45deg);
+            }
+        }
+    }
+
+    @include breakpoint($medium){
+        display: none;
+    }
+}
+
+.Footer {
+
+    padding: 5.4rem 2.4rem;
+    background-color: #232127;
+    text-align: center;
+
+    @include breakpoint($large){
+        padding: 7rem 2.4rem;
+        text-align: left;
+    }
+
+    @include breakpoint($largest){
+        padding: 7rem 16.7rem;
+    }
+
+    &__inner{
+        max-width: 1110px;
+        margin: 0 auto;
+
+        @include breakpoint($large){
+            display: grid;
+            grid-template-columns: 1fr max-content max-content;
+        }
+
+        @include breakpoint($largest){
+            max-width: none;
+        }
+    }
+
+    &__logo{
+        filter: brightness(0) invert(1);
+    }
+
+    &__lists {
+
+        & > :first-child {
+            margin-top: 5rem;
+        }
+
+        & > :not(:last-child) {
+            margin-bottom: 4rem;
+        }
+
+        & > :last-child {
+            margin-bottom: 4.8rem;
+        }
+
+        @include breakpoint($small){
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 5rem auto;
+            max-width: 80rem;
+
+            & > :nth-child(n) {
+                margin: 0;
+            }
+        }
+
+        @include breakpoint($large){
+            margin: 0 10rem 0 0;
+            column-gap: 8rem;
+        }
+
+    }
+
+    &__list-title {
+        color: #FFF;
+        font-weight: 700;
+        font-size: 1.6rem;
+        letter-spacing: -0.25px;
+        margin-bottom: 2.2rem;
+        list-style: none;
+    }
+
+    &__list-item {
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+        color: #BFBFBF;
+        font-size: 1.5rem;
+        letter-spacing: -0.23px;
+        font-weight: 500;
+        cursor: pointer;
+
+        @include breakpoint($large){
+            margin: 0;
+        }
+
+        &:hover {
+            color: $color-cyan;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__socials {
+
+        svg{
+
+            cursor: pointer;
+                &:not(:last-child){
+                    margin-right: 2.4rem;
+                }
+            
+            &:hover path{
+                fill: $color-cyan;
+            }
+        }
+    }
+}
+
