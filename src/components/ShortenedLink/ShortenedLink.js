@@ -6,10 +6,6 @@ const ShortenedLink = props => {
 
     const copy = useRef(null)
 
-    useEffect(() => {
-        console.log('rendering')
-    })
-
     const copyHandler = () => {
         copy.current.select()
         document.execCommand('copy')
