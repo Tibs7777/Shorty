@@ -27,23 +27,36 @@ const Shortener = (props) => {
         setLinks(newLinks)
     }
 
-
     useEffect(() => {
-        const handleBeforeUnload = () => {
-            const uncopiedLinks = links.map(link => {
-                return {
-                    ...link,
-                    copied: false
-                }
-            })
-            localStorage.setItem("Links", JSON.stringify(uncopiedLinks))
-        }
-
-        window.addEventListener('beforeunload', handleBeforeUnload)
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload)
-        }
+        const uncopiedLinks = links.map(link => {
+            return {
+                ...link,
+                copied: false
+            }
+        })
+        window.localStorage.setItem("Links", JSON.stringify(uncopiedLinks))
     }, [links])
+
+
+    // useEffect(() => {
+    //     const handleBeforeUnload = () => {
+    //         const uncopiedLinks = links.map(link => {
+    //             return {
+    //                 ...link,
+    //                 copied: false
+    //             }
+    //         })
+    //         localStorage.setItem("Links", JSON.stringify(uncopiedLinks))
+    //     }
+
+    //     window.addEventListener('beforeunload', handleBeforeUnload)
+    //     return () => {
+    //         window.removeEventListener('beforeunload', handleBeforeUnload)
+    //     }
+    // }, [links])
+
+
+
 
     const shortenLink = (url) => {
         if(url[0] === "w" && url[1] === "w" && url[2] === "w") {
@@ -85,6 +98,8 @@ const Shortener = (props) => {
         const newLinks = links.filter(link => link.hashid !== id)
         setLinks(newLinks)
     }, [links, setLinks])
+
+
 
 
 

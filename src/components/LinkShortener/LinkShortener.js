@@ -5,7 +5,6 @@ import './LinkShortener.scss'
 
 const LinkShortener = props => {
 
-    
 
     let inputClasses = "LinkShortener__input"
     let errorMessage = null
