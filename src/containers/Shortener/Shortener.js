@@ -94,7 +94,6 @@ const Shortener = (props) => {
     }
 
     const deleteLink = useCallback((id) => {
-        console.log(id)
         const newLinks = links.filter(link => link.hashid !== id)
         setLinks(newLinks)
     }, [links, setLinks])
