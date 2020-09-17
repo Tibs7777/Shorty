@@ -13,24 +13,8 @@ const Shortener = (props) => {
     const [link, setLink] = useState('')
     const [loading, setLoading] = useState(false)
 
-    // const oldLinks = [
-    //     {
-    //         original: "https://www.frontendmentor.io",
-    //         shortened: "https://rel.ink/k4lKyk"
-    //     },
-    //     {
-    //         original: "https://www.frontendmentor.io",
-    //         shortened: "https://rel.ink/k4lKyk"
-    //     },
-    //     {
-    //         original: "https://www.linkedin.com/company/frontend-mentor",
-    //         shortened: "https://rel.ink/k4lKyk"
-    //     },
-    // ]
-
     useEffect(() => {
-        const getLinks = JSON.parse(localStorage.getItem("Links"))
-        console.log(getLinks)
+        const getLinks = JSON.parse(localStorage.getItem("Links")) || []
         setLinks(getLinks)
     }, [])
 

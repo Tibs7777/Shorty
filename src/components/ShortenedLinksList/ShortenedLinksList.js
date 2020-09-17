@@ -6,9 +6,6 @@ import './ShortenedLinksList.scss'
 const ShortenedLinksList = props => {
 
 
-    useEffect(() => {
-        console.log('rendering list')
-    })
 
     return(
         <div className="ShortenedLinksList">
