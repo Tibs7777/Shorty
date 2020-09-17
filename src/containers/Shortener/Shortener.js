@@ -13,6 +13,7 @@ const Shortener = (props) => {
     const [link, setLink] = useState('')
     const [loading, setLoading] = useState(false)
 
+
     useEffect(() => {
         const getLinks = JSON.parse(localStorage.getItem("Links")) || []
         setLinks(getLinks)
@@ -29,7 +30,6 @@ const Shortener = (props) => {
 
     useEffect(() => {
         const handleBeforeUnload = () => {
-            console.log('fired')
             const uncopiedLinks = links.map(link => {
                 return {
                     ...link,
